@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northford College of Data Science & Business Innovation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200') center/cover;
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #e55a2b;
+        }
+
+        /* Vision & Mission */
+        .vision-mission {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .vm-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .vm-card h3 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Programs Section */
+        .programs {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .programs h2 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .programs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-category {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .program-category h3 {
+            color: #2a5298;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #ff6b35;
+            padding-bottom: 0.5rem;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .program-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #1e3c72;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .program-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .program-item h4 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.9);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact h2 {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #1e3c72;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+
+            .logo-text p {
+                font-size: 0.6rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .programs h2, .gallery h2, .contact h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-circle">NCDSBI</div>
+                <div class="logo-text">
+                    <h1>Northford College</h1>
+                    <p>Data Science & Business Innovation</p>
+                </div>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h2>Empowering Africa's Digital Future</h2>
+        <p>Leading private center of excellence in data science, technology, and business innovation</p>
+        <a href="#programs" class="cta-button">Explore Our Programs</a>
+    </section>
+
+    <section class="vision-mission" id="about">
+        <div class="vm-card">
+            <h3>⭐ Vision</h3>
+            <p>To become the leading private center of excellence in data science, technology, and business innovation, empowering learners to drive digital and economic transformation across Africa.</p>
+        </div>
+        <div class="vm-card">
+            <h3>⭐ Mission</h3>
+            <p>To provide practical, industry-driven training in data science, ICT, and business innovation, equipping learners with relevant skills, ethical values, and an entrepreneurial mindset to create solutions and opportunities in their communities.</p>
+        </div>
+    </section>
+
+    <section class="programs" id="programs">
+        <h2>Our Programs</h2>
+        <div class="programs-container">
+            <div class="program-category">
+                <h3>Diploma Programs</h3>
+                <div class="program-grid">
+                    <div class="program-item">
+                        <h4>Diploma in Data Science & Analytics</h4>
+                        <p>Master data analysis, statistics, and machine learning</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Diploma in Information Technology</h4>
+                        <p>Comprehensive IT skills and system management</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Diploma in Business Innovation & Entrepreneurship</h4>
+                        <p>Build and scale innovative business ventures</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Diploma in Digital Marketing & E-Commerce</h4>
+                        <p>Master online marketing and e-commerce strategies</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Diploma in Financial Technology (FinTech)</h4>
+                        <p>Learn digital finance and payment systems</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Diploma in Project Planning & Management</h4>
+                        <p>Professional project management certification</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-category">
+                <h3>Certificate Programs</h3>
+                <div class="program-grid">
+                    <div class="program-item">
+                        <h4>Certificate in Computer Applications</h4>
+                        <p>Essential computer skills for the workplace</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Certificate in Data Management & Statistics</h4>
+                        <p>Statistical analysis and data handling</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Certificate in Business Administration</h4>
+                        <p>Core business management principles</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Certificate in Web & Graphics Design</h4>
+                        <p>Create stunning websites and graphics</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Certificate in Cybersecurity Fundamentals</h4>
+                        <p>Protect systems and networks from threats</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Certificate in Entrepreneurship & Small Business Startup</h4>
+                        <p>Launch your own successful business</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-category">
+                <h3>Short Courses in Data Science (3-12 weeks)</h3>
+                <div class="program-grid">
+                    <div class="program-item">
+                        <h4>Introduction to Data Science</h4>
+                        <p>Perfect starter course in data fundamentals</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Data Analysis with Excel & Power BI</h4>
+                        <p>High demand in NGOs and government</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Python for Data Analysis</h4>
+                        <p>Data cleaning, visualization, automation</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Data Visualization Using Power BI / Tableau</h4>
+                        <p>Create dashboards, reports, and analytics</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Statistics for Data Science</h4>
+                        <p>Essential foundations for all data work</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>SQL for Data Management</h4>
+                        <p>Query databases, essential for analysts</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Machine Learning Foundations</h4>
+                        <p>Beginner-friendly supervised & unsupervised learning</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>SPSS for Research & Data Management</h4>
+                        <p>Highly demanded by NGOs and universities</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Monitoring & Evaluation Data Skills</h4>
+                        <p>Data collection tools, cleaning, and reporting</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Data Engineering Basics</h4>
+                        <p>ETL pipelines and data processing tools</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-category">
+                <h3>Short Courses in Computer & Technology (4-12 weeks)</h3>
+                <div class="program-grid">
+                    <div class="program-item">
+                        <h4>Computer Applications</h4>
+                        <p>MS Word, Excel, PowerPoint, Internet</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Graphics Design</h4>
+                        <p>Photoshop, Illustrator, Canva</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Web Design & Development</h4>
+                        <p>HTML, CSS, WordPress</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Cybersecurity Fundamentals</h4>
+                        <p>Safe systems and threat basics</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Digital Marketing & Social Media Management</h4>
+                        <p>Facebook ads, Instagram marketing, content creation</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Mobile App Development</h4>
+                        <p>Introduction to Android programming</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Computer Networking</h4>
+                        <p>Cisco basics, network setup, troubleshooting</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>IT Support & Hardware Maintenance</h4>
+                        <p>Computer repair, installations, troubleshooting</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Cloud Computing Basics</h4>
+                        <p>AWS/Azure, cloud tools, hosting</p>
+                    </div>
+                    <div class="program-item">
+                        <h4>Database Design & Management</h4>
+                        <p>MySQL, PostgreSQL essentials</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2>Campus Life</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600" alt="Students learning">
+                <div class="gallery-overlay">
+                    <h4>Modern Learning Environment</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600" alt="Computer lab">
+                <div class="gallery-overlay">
+                    <h4>State-of-the-Art Computer Labs</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600" alt="Group study">
+                <div class="gallery-overlay">
+                    <h4>Collaborative Learning Spaces</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600" alt="Technology">
+                <div class="gallery-overlay">
+                    <h4>Industry-Standard Technology</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600" alt="Innovation">
+                <div class="gallery-overlay">
+                    <h4>Innovation & Entrepreneurship</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600" alt="Campus">
+                <div class="gallery-overlay">
+                    <h4>Beautiful Campus Facilities</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>Get in Touch</h2>
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>📧 Email: info@ncdsbi.ac.ug</p>
+                <p>📞 Phone: +256 XXX XXX XXX</p>
+                <p>📍 Location: Kampala, Uganda</p>
+            </div>
+            <div class="contact-info">
+                <h3>Admissions Office</h3>
+                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="contact-info">
+                <h3>Follow Us</h3>
+                <p>🌐 Facebook</p>
+                <p>🌐 Twitter</p>
+                <p>🌐 LinkedIn</p>
+                <p>🌐 Instagram</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Northford College of Data Science & Business Innovation. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
